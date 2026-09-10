@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <!-- TODO (passo 3): pacotes de EF Core e Swagger, iguais ao Auth.API.
+         Repare que este projeto NÃO precisa do pacote de JWT Bearer -
+         ele não emite nem valida token sozinho, só pergunta pro Auth.API.
+         Pense em qual pacote ele PRECISA pra fazer chamadas HTTP
+         (dica: já vem no SDK, você só vai configurar via DI). -->
+  </ItemGroup>
+
+</Project>
