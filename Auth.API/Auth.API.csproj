@@ -14,4 +14,8 @@
          Swashbuckle.AspNetCore (fixar em 6.6.2, lembra do motivo?) -->
   </ItemGroup>
 
+  <ItemGroup>
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.6.2" />
+  </ItemGroup>
+
 </Project>

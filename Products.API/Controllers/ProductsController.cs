@@ -2,18 +2,31 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Products.API.Controllers;
 
+public record ProductRequest(string Name, decimal Price);
+public record Product(int Id, string Name, decimal Price);
+
 [ApiController]
 [Route("api/[controller]")]
 public class ProductsController : ControllerBase
 {
-    // TODO (passo 3): migrar aqui a lógica do ProductController atual
-    // (POST/GET/DELETE), usando o repositório e o DbContext deste projeto.
+    private static readonly List<Product> _products = new();
+    private static int _nextId = 1;
 
-    // TODO (passo 5): antes de executar qualquer ação, este controller
-    // (ou um middleware/filtro) precisa checar o token com o Auth.API
-    // usando o HttpClient configurado no Program.cs.
-    // Pergunta pra pensar: essa validação deveria ficar dentro de cada
-    // método do controller, ou em algum lugar mais centralizado
-    // (tipo um middleware ou um ActionFilter)? Isso lembra algo que
-    // você já viu no pipeline de middleware do seu Marketplace.API?
+    [HttpGet]
+    public IActionResult GetAll() => Ok(_products);
+
+    [HttpGet("{id:int}")]
+    public IActionResult GetById(int id)
+    {
+        var product = _products.FirstOrDefault(p => p.Id == id);
+        return product is null ? NotFound() : Ok(product);
+    }
+
+    [HttpPost]
+    public IActionResult Create(ProductRequest request)
+    {
+        var product = new Product(_nextId++, request.Name, request.Price);
+        _products.Add(product);
+        return CreatedAtAction(nameof(GetById), new { id = product.Id }, product);
+    }
 }
