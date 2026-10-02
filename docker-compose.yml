@@ -1,0 +1,10 @@
+services:
+  auth-api:
+    build: ./Auth.API
+    ports:
+      - "5001:8080"
+
+  products-api:
+    build: ./Products.API
+    ports:
+      - "5002:8080"

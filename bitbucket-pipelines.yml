@@ -1,0 +1,14 @@
+image:
+  name: mcr.microsoft.com/dotnet/sdk:8.0 AS build
+
+definitions:
+  steps:
+    - step:
+      name: install dependencies
+      caches:
+        - npm install
+    - step:
+      name: Lint
+      script:
+        - npm install --save--dev eslint
+        - npm run lint
